@@ -1,0 +1,38 @@
+services:
+  db:
+    image: ghcr.io/fran321tec/mysql_image_docker-db:latest
+    container_name: mysql_preloaded
+    environment:
+      MYSQL_ROOT_PASSWORD: M1Cl4v3
+      MYSQL_DATABASE: seleccion_2
+      MYSQL_USER: fran321tec
+      MYSQL_PASSWORD: m1cl4v3
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./db-init:/docker-entrypoint-initdb.d
+      - mysql_data:/var/lib/mysql
+  django-web:
+    build: .
+    image: ghcr.io/fran321tec/seleccion_arkenco:latest
+    container_name: django-docker
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DJANGO_SECRET_KEY: 'django-insecure-6#r6*nj(tp-!4b$-w@gky9x%(^2m^s(f@k0b3f44wmtuo!bb9!'
+      DEBUG: true
+      
+      DJANGO_LOGLEVEL: info
+      DJANGO_ALLOWED_HOSTS: '*'
+      DATABASE_ENGINE: mysql
+      DATABASE_NAME: seleccion_2
+      DATABASE_USERNAME: fran321tec
+
+      DATABASE_PASSWORD: m1cl4v3
+      DATABASE_HOST: db
+      DATABASE_PORT: 3307
+  
+volumes:
+  mysql_data:
