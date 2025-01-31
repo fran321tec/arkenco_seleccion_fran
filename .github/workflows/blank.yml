@@ -27,7 +27,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: |
-          docker login --username fran321tec --password ${{ GH_PASSWORD }}
+          docker login --username fran321tec --password ${{ gh_password }}
           docker compose up --build ghcr.io/fran321tec/seleccion_arkenco:latest
           docker compose up -- build ghcr.io/fran321tec/mysql_image_docker-db:latest
           
