@@ -29,5 +29,7 @@ jobs:
         run: |
           docker pull ghcr.io/fran321tec/mysql_image_docker-db:latest
           docker pull ghcr.io/fran321tec/seleccion_arkenco:latest
+          docker login --username fran321tec --password ${{ SECRETS.GH_PASSWORD }}
+          docker compose up --build -d
           
 
