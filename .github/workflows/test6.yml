@@ -29,6 +29,7 @@ jobs:
         run: |
           docker pull ghcr.io/fran321tec/mysql_image_docker-db:latest
           docker pull ghcr.io/fran321tec/seleccion_arkenco:latest
+          docker compose up --build mysql_image_docker-db
           docker compose up --build seleccion_arkenco
           
 
